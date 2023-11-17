@@ -1,6 +1,21 @@
 -- Milestone 3
 -- This document has solutions to 6 (or more) out of the 12 Questions which were mentioned in Milestone 2.
 
+-- Q1 What genre of videos have the highest number of likes?
+-- Solution: Aggregate likes per category and find the highest.
+SELECT CategoryID, SUM(Likes) AS TotalLikes
+FROM Video
+GROUP BY CategoryID
+ORDER BY TotalLikes DESC
+LIMIT 1;
+
+-- Q2 Which channels are the most popular and how are they measured?
+-- Solution: Sort channels by subscriber count.
+SELECT Name, Subscribers
+FROM Channel
+ORDER BY Subscribers DESC
+LIMIT 10;
+
 -- Q3 How does the like/dislike ratio vary by video category across different countries?
 -- Solution: Calculate like/dislike ratio for each category in different countries.
 SELECT V.CategoryID, U.Country, AVG(CAST(V.Likes AS FLOAT) / V.Dislikes) AS LikeDislikeRatio
