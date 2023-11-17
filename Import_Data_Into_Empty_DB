@@ -1,3 +1,5 @@
+-- This file has spcipt to Import Data into an Empty Database.
+
 -- Create Tables
 CREATE TABLE User_Details (
     UserID CHAR(10) PRIMARY KEY,
