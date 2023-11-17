@@ -58,3 +58,7 @@ WHERE
     CURRENT_DATE - c.Date < 365 -- filter channels that are less than a year old
 ORDER BY
     c.Region, ViewsPerDay DESC;
+
+--Q7 
+-- Solution: 
+
