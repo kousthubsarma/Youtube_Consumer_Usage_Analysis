@@ -1,5 +1,7 @@
 -- This file has script to Import Data into an Empty Database.
 
+-- This file contains the script to Import Data into an Empty Database.
+
 -- Create Tables
 CREATE TABLE User_Details (
     UserID CHAR(10) PRIMARY KEY,
@@ -30,5 +32,30 @@ CREATE TABLE Channel (
     Region CHAR
 );
 
--- Import data from CSV files
+CREATE TABLE Comments (
+    CommentID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    VideoID CHAR(10),
+    CommentText VARCHAR2(255),
+    Likes INTEGER,
+    Sentiment INTEGER,
+    FOREIGN KEY (VideoID) REFERENCES Video(VideoID)
+);
+
+-- Import data from CSV files into the Video and Comments tables
+-- Adjust these commands based on your SQL database system (e.g., PostgreSQL, MySQL)
 -- This part will vary depending on your specific SQL database tools and commands.
+
+-- Example:
+
+-- Import data into Video table
+COPY Video(VideoID, Title, Date, Keyword, Likes, Comments, Views)
+FROM '/Users/Username/Desktop/Fall2023/CNIT372/Youtube Statistics/videos-stats.csv'
+DELIMITER ','
+CSV HEADER;
+
+-- Import data into Comments table
+COPY Comments(VideoID, CommentText, Likes, Sentiment)
+FROM '/Users/Username/Desktop/Fall2023/CNIT372/Youtube Statistics/comments.csv'
+DELIMITER ','
+CSV HEADER;
+
