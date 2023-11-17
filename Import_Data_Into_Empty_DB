@@ -1,0 +1,32 @@
+-- Create Tables
+CREATE TABLE User_Details (
+    UserID CHAR(10) PRIMARY KEY,
+    Username VARCHAR2(15),
+    Country VARCHAR2(20)
+);
+
+CREATE TABLE Video (
+    VideoID CHAR(10) PRIMARY KEY,
+    CategoryID CHAR(10),
+    Title VARCHAR2(50),
+    Date DATE,
+    Keyword VARCHAR2(15),
+    Likes INTEGER,
+    Dislikes INTEGER,
+    Comments INTEGER,
+    Views INTEGER
+);
+
+CREATE TABLE Channel (
+    Name VARCHAR2(50) PRIMARY KEY,
+    Type VARCHAR2(20),
+    Subscribers INTEGER,
+    Views INTEGER,
+    Videos INTEGER,
+    Rank INTEGER,
+    Country CHAR,
+    Region CHAR
+);
+
+-- Import data from CSV files
+-- This part will vary depending on your specific SQL database tools and commands.
