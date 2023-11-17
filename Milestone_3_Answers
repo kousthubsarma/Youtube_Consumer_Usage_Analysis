@@ -40,3 +40,21 @@ GROUP BY V.Keyword, C.Region
 ORDER BY TotalViews DESC
 LIMIT 5;
 
+-- Q6 Which new channels (less than a year old) are gaining popularity the fastest in each region?
+-- Solution: Extract channel information and sort by region and views per day.
+SELECT
+    c.Name AS ChannelName,
+    c.Subscribers AS Subscribers,
+    c.Views AS ChannelViews,
+    c.Videos AS ChannelVideos,
+    c.Rank AS ChannelRank,
+    c.Country AS ChannelCountry,
+    c.Region AS ChannelRegion,
+    CURRENT_DATE - c.Date AS ChannelAgeInDays, --calculate the age of each channel
+    c.Views / (CURRENT_DATE - c.Date) AS ViewsPerDay --calculate views per day
+FROM
+    Channel c
+WHERE
+    CURRENT_DATE - c.Date < 365 -- filter channels that are less than a year old
+ORDER BY
+    c.Region, ViewsPerDay DESC;
