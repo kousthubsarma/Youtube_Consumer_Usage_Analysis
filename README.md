@@ -4,14 +4,19 @@ This tool lets you analyze YouTube usage, such as watching habit, interests, and
 
 
 Group #2 Milestone 1
+
 Group names: Sri Yadali, Aayaan Amir, Kousthub Sarma, Satya Bonepalli
+
 Option Choice: Option A - Usage of YouTube as a Content Consumer
+
 Data Plan information:
 We plan to use the YouTube Trending Video Dataset (updated daily), the Global YouTube Statistics 2023 dataset  and the Youtube Statistics dataset.
+
 Table 1: User_Details
 UserID (PK, CHAR (10))
 Username VARCHAR2 (15)
 Country VARCHAR2 (20)
+
 Table 2: Video
 VideoID (PK, CHAR(10))
 CategoryID CHAR(10)
@@ -22,6 +27,7 @@ Likes INTEGER
 Dislikes	INTEGER
 Comments VARCHAR2(50)
 Views INTEGER
+
 Table 3: Channel
 Name (PK, VARCHAR2 (50))
 Type VARCHAR2(20))
@@ -31,7 +37,9 @@ Videos INTEGER
 Rank INTEGER
 Country CHAR
 Region CHAR
+
 Relationships: User -< Video | User -< Channel | Channel -< Video
+
 Teamwork contribution: 
 Sri: Brainstormed datasets, wrote datatypes, planned relationships.
 Aayaan: Brainstormed datasets, wrote tables, wrote relationships
@@ -41,17 +49,28 @@ Satya: Worked on the database design and table relationships.
 
 
 Group #2 Milestone 2
+
 Group names: Sri Yadali, Aayaan Amir, Kousthub Sarma, Satya Bonepalli
+
 Option Choice: Option A - Usage of YouTube as a Content Consumer
 
 Questions to analyze
+
 What genre of videos have the highest number of likes?
+
 Which channels are the most popular and how are they measured?
+
 Which video category is the most popular in each country/region?
+
+
 Knowledge from class: This will leverage data aggregation and regional segmentation techniques.
+
 Importance: Video creators can target their content better based on regional preferences.
+
 How does the like/dislike ratio vary by video category across different countries?
+
 Knowledge from class: Analyzing ratio metrics and cross-referencing them with categories and regions.
+
 Importance: To understand the audience sentiment for each category in different regions.
 Which channels have the highest average likes and which ones have the highest average dislikes?
 Knowledge from class: Data aggregation on channels to analyze average metrics.
