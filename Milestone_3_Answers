@@ -59,6 +59,18 @@ WHERE
 ORDER BY
     c.Region, ViewsPerDay DESC;
 
---Q7 
--- Solution: 
-
+--Q7 Which countries/regions contribute the most subscribers for a given channel?
+-- Solution: Extract channel name with geographic information and total subscribers to then sort by channel name and subscribers.
+SELECT
+    c.ChannelName,
+    u.Country,
+    u.Region,
+    SUM(c.Subscribers) AS TotalSubs
+FROM
+    Channel c
+JOIN
+    User_Details u ON c.Name = u.Username
+GROUP BY
+    c.ChannelName, u.Country, u.Region
+ORDER BY
+    c.ChannelName, TotalSubs DESC;
