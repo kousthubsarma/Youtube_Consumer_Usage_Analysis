@@ -1,0 +1,27 @@
+-- Milestone 3
+-- This document has solutions to 6 (or more) out of the 12 Questions which were mentioned in Milestone 2.
+
+-- Q3 How does the like/dislike ratio vary by video category across different countries?
+-- Solution: Calculate like/dislike ratio for each category in different countries.
+SELECT V.CategoryID, U.Country, AVG(CAST(V.Likes AS FLOAT) / V.Dislikes) AS LikeDislikeRatio
+FROM Video V
+JOIN User_Details U ON V.UserID = U.UserID
+GROUP BY V.CategoryID, U.Country;
+
+-- Q4 Which channels have the highest average likes and which ones have the highest average dislikes?
+-- Solution: Use aggregate functions for average likes and dislikes per channel.
+SELECT C.Name, AVG(V.Likes) AS AvgLikes, AVG(V.Dislikes) AS AvgDislikes
+FROM Channel C
+JOIN Video V ON C.Name = V.ChannelName
+GROUP BY C.Name
+ORDER BY AvgLikes DESC, AvgDislikes DESC;
+
+-- Q5 What are the top 5 keywords associated with the highest viewed videos in each region?
+-- Solution: Extract keywords and sort by views.
+SELECT V.Keyword, C.Region, SUM(V.Views) AS TotalViews
+FROM Video V
+JOIN Channel C ON V.ChannelName = C.Name
+GROUP BY V.Keyword, C.Region
+ORDER BY TotalViews DESC
+LIMIT 5;
+
