@@ -1,4 +1,4 @@
--- This file has spcipt to Import Data into an Empty Database.
+-- This file has script to Import Data into an Empty Database.
 
 -- Create Tables
 CREATE TABLE User_Details (
