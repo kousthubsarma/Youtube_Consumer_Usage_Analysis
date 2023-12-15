@@ -12,8 +12,25 @@ Our analysis utilized a comprehensive dataset encompassing various aspects of Yo
 ## Solutions and Findings
 Our approach involved a series of SQL and PL/SQL queries to extract and analyze data, leading to a range of findings. We discovered trends such as the most liked video categories, the channels with the highest subscriber count, and variations in user preferences across different regions. These insights not only shed light on the current state of content consumption on YouTube but also highlight potential areas for growth and innovation in content creation.
 
+### Data Preparation
+To get started with our analysis, we first need to prepare our data. This involves setting up the database tables and importing the data from our datasets. The necessary SQL scripts for this process are located in the `data_import_sql` file in our repository. 
+
+#### Steps for Data Preparation:
+1. **Database Setup**: Create the required tables in your database using the SQL scripts provided.
+2. **Data Import**: Use the scripts to import data into these tables from the datasets.
+3. **Data Verification**: Ensure the data has been correctly imported and structured.
+
+### Data Analysis
+After preparing the data, we move on to the analysis part. The analysis is conducted using SQL and PL/SQL queries, which are designed to extract meaningful insights from the dataset. You can find all the relevant scripts in the `analysis_code_sql` file.
+
+#### Steps for Data Analysis:
+1. **Running Queries**: Execute the SQL and PL/SQL scripts located in the `analysis_code_sql` file.
+2. **Interpreting Results**: Each script is accompanied by comments that explain the purpose of the query and the insights it provides.
+3. Ensure that you have the necessary database privileges to execute these scripts and that your database environment is compatible with the SQL standards used in our scripts.
+
 ## Team Contribution
 - **Aayaan Amir**: Engaged in brainstorming, presentation preparation, report writing, coding, and data research.
 - **Kousthub Sarma**: Contributed to brainstorming, presentation development, report writing, coding, and data research.
 - **Sri Yadali**: Actively involved in brainstorming, preparing presentations, writing reports, coding, and researching data.
 - **Satya Bonepalli**: Participated in brainstorming sessions, presentation creation, report drafting, coding, and data research.
+
