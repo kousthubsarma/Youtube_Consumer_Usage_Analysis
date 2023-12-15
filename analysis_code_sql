@@ -1,0 +1,135 @@
+-- 1. What is the category with the highest likes?
+-- This query identifies the most popular category based on total likes.
+SELECT category, SUM(subscribers) AS TotalLikes 
+FROM youtube_data 
+GROUP BY category 
+ORDER BY TotalLikes DESC 
+FETCH FIRST ROW ONLY;
+
+-- 2. What is the most popular channel?
+-- This PL/SQL block finds the channel with the highest number of subscribers.
+DECLARE
+    max_subscribers INTEGER;
+    top_channel VARCHAR2(50);
+BEGIN
+    SELECT Youtuber, MAX(subscribers) INTO top_channel, max_subscribers
+    FROM youtube_data
+    GROUP BY Youtuber
+    ORDER BY MAX(subscribers) DESC
+    FETCH FIRST ROW ONLY;
+    DBMS_OUTPUT.PUT_LINE('Most Popular Channel: ' || top_channel || ' with Subscribers: ' || max_subscribers);
+END;
+
+-- 3. What are the most popular video categories per region?
+-- This query determines the most popular video categories in each region.
+SELECT Region, category, COUNT(*) AS Count 
+FROM youtube_data 
+GROUP BY Region, category 
+ORDER BY Region, Count DESC;
+
+-- 4. Display the like/dislike ratio variations for certain videos.
+-- This PL/SQL block calculates the like/dislike ratio for videos in each category.
+DECLARE
+    ratio NUMBER;
+    video_title VARCHAR2(50);
+BEGIN
+    FOR record IN (SELECT DISTINCT category FROM youtube_data) LOOP
+        SELECT Title, MAX(subscribers / NULLIF(video views, 0))
+        INTO video_title, ratio
+        FROM youtube_data
+        WHERE category = record.category
+        GROUP BY Title, category
+        FETCH FIRST ROW ONLY;
+        DBMS_OUTPUT.PUT_LINE('Category: ' || record.category || ', Video: ' || video_title || ', Ratio: ' || ratio);
+    END LOOP;
+END;
+
+-- 5. What are the top 5 countries with the highest number of YouTube subscribers?
+-- This PL/SQL block fetches the top 5 countries based on total YouTube subscribers.
+DECLARE
+    type_subscribers INTEGER;
+    country_name VARCHAR2(20);
+    CURSOR country_subscribers IS
+        SELECT Country, SUM(subscribers) AS TotalSubscribers
+        FROM youtube_data
+        GROUP BY Country
+        ORDER BY SUM(subscribers) DESC
+        FETCH FIRST 5 ROWS ONLY;
+BEGIN
+    FOR record IN country_subscribers LOOP
+        country_name := record.Country;
+        type_subscribers := record.TotalSubscribers;
+        DBMS_OUTPUT.PUT_LINE('Country: ' || country_name || ', Total Subscribers: ' || type_subscribers);
+    END LOOP;
+END;
+
+-- 6. Which Country Has the Highest Average Number of Video Views?
+-- This PL/SQL block identifies the country with the highest average video views.
+DECLARE
+    max_views INTEGER;
+    top_country VARCHAR2(20);
+BEGIN
+    SELECT Country, AVG("video views") INTO top_country, max_views
+    FROM youtube_data
+    GROUP BY Country
+    ORDER BY AVG("video views") DESC
+    FETCH FIRST ROW ONLY;
+    DBMS_OUTPUT.PUT_LINE('Country with Highest Average Views: ' || top_country || ' with Views: ' || max_views);
+END;
+
+-- 7. What is the Average Number of Uploads Across All Channels?
+-- This PL/SQL block calculates the average number of uploads across all YouTube channels.
+DECLARE
+    avg_uploads FLOAT;
+BEGIN
+    SELECT AVG(uploads) INTO avg_uploads
+    FROM youtube_data;
+    DBMS_OUTPUT.PUT_LINE('Average Number of Uploads: ' || avg_uploads);
+END;
+
+-- 8. Which Channel Category Has the Most Uploads?
+-- This PL/SQL block finds the channel category with the most uploads.
+DECLARE
+    max_uploads INTEGER;
+    top_category VARCHAR2(20);
+BEGIN
+    SELECT category, MAX(uploads) INTO top_category, max_uploads
+    FROM youtube_data
+    GROUP BY category
+    ORDER BY MAX(uploads) DESC
+    FETCH FIRST ROW ONLY;
+    DBMS_OUTPUT.PUT_LINE('Category with Most Uploads: ' || top_category || ' with Uploads: ' || max_uploads);
+END;
+
+-- 9. What are the Top 3 Most Common Channel Types?
+-- This PL/SQL block lists the top three most common channel types on YouTube.
+DECLARE
+    CURSOR channel_types IS
+        SELECT channel_type, COUNT(*) AS Count
+        FROM youtube_data
+        GROUP BY channel_type
+        ORDER BY COUNT(*) DESC
+        FETCH FIRST 3 ROWS ONLY;
+    type_name VARCHAR2(20);
+    type_count INTEGER;
+BEGIN
+    FOR record IN channel_types LOOP
+        type_name := record.channel_type;
+        type_count := record.Count;
+        DBMS_OUTPUT.PUT_LINE('Channel Type: ' || type_name || ', Count: ' || type_count);
+    END LOOP;
+END;
+
+-- 10. Which Year Saw the Highest Number of New Channels Created?
+-- This PL/SQL block determines the year with the most new channel creations.
+DECLARE
+    max_year INTEGER;
+    year_count INTEGER;
+BEGIN
+    SELECT TO_CHAR(created_date, 'YYYY'), COUNT(*) INTO max_year, year_count
+    FROM youtube_data
+    GROUP BY TO_CHAR(created_date, 'YYYY')
+    ORDER BY COUNT(*) DESC
+    FETCH FIRST ROW ONLY;
+    DBMS_OUTPUT.PUT_LINE('Year with Most Channel Creations: ' || max_year || ' with Count: ' || year_count);
+END;
